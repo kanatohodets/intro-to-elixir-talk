@@ -10,23 +10,16 @@ defmodule TelnetNiceThings do
     IO.puts("bringing joy on #{port}!")
     accept_and_serve(socket)
   end
+
   # ... accept_and_serve definition
-
-
-
-
-  # ... listen definition
   defp accept_and_serve(listen_socket) do
     {:ok, client_socket} = :gen_tcp.accept(listen_socket)
     # spawn a process to serve this client (think goroutine)
     spawn(fn() -> say_nice_things(client_socket) end)
     accept_and_serve(listen_socket)
   end
+
   # ... say_nice_things definition
-
-
-
-
   defp say_nice_things(socket) do
     prompt = "are you feeling better?> "
     :gen_tcp.send(socket, prompt)
